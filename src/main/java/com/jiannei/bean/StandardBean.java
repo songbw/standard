@@ -143,7 +143,7 @@ public class StandardBean extends ReflectionDBObject implements Serializable {
     }
 
     public String getSmallImgPath() {
-        return smallImgPath;
+        return "http://biaozhunjian.b0.upaiyun.com/"+smallImgPath;
     }
 
     public void setSmallImgPath(String smallImgPath) {
@@ -151,7 +151,7 @@ public class StandardBean extends ReflectionDBObject implements Serializable {
     }
 
     public String getImgPath() {
-        return imgPath;
+        return "http://biaozhunjian.b0.upaiyun.com/"+imgPath;
     }
 
     public void setImgPath(String imgPath) {
@@ -167,7 +167,7 @@ public class StandardBean extends ReflectionDBObject implements Serializable {
     }
 
     public String getSmallImgPathT() {
-        return smallImgPathT;
+        return "http://biaozhunjian.b0.upaiyun.com/"+smallImgPathT;
     }
 
     public void setSmallImgPathT(String smallImgPathT) {
