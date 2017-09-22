@@ -34,11 +34,23 @@ public class StandardController {
         return resultBean ;
     }
 
-    @RequestMapping(value="",method= RequestMethod.GET)
+    @RequestMapping(value="/code",method= RequestMethod.GET)
     public @ResponseBody ResultBean codeStandard(String code) {
         ResultBean resultBean = new ResultBean();
         try {
             resultBean = standardService.searchStandardByCode(code) ;
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultBean.setFailMsg(SystemStatus.SERVER_ERROR);
+        }
+        return resultBean ;
+    }
+
+    @RequestMapping(value="",method= RequestMethod.GET)
+    public @ResponseBody ResultBean standardType(String type) {
+        ResultBean resultBean = new ResultBean();
+        try {
+            resultBean = standardService.searchStandardByType(type) ;
         } catch (Exception e) {
             e.printStackTrace();
             resultBean.setFailMsg(SystemStatus.SERVER_ERROR);

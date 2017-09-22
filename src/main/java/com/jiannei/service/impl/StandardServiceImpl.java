@@ -45,4 +45,16 @@ public class StandardServiceImpl implements StandardService {
         resultBean.setSucResult(pageBean);
         return resultBean;
     }
+
+    @Override
+    public ResultBean searchStandardByType(String type) throws Exception {
+        ResultBean resultBean = new ResultBean();
+        List<StandardBean> standardBeanList = standardDAO.selectByType(type);
+        int total = standardDAO.selectByTypeCount(type);
+        PageBean pageBean = new PageBean();
+        pageBean.setList(standardBeanList);
+        pageBean.setTotal(total);
+        resultBean.setSucResult(pageBean);
+        return resultBean;
+    }
 }

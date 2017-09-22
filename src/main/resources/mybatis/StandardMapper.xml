@@ -73,4 +73,12 @@
     <select id="selectByCodeCount" resultType="java.lang.Integer" parameterType="String">
         select count(*) from standard WHERE code = #{code}
     </select>
+
+    <select id="selectByType" resultMap="standardResultMap" parameterType="String">
+        select * from standard WHERE type = #{type}
+    </select>
+
+    <select id="selectByTypeCount" resultType="java.lang.Integer" parameterType="String">
+        select count(*) from standard WHERE type = #{type}
+    </select>
 </mapper>

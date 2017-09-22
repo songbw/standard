@@ -30,4 +30,8 @@ public interface StandardDAO {
     int updateImgFlag(StandardBean standardBean) ;
 
     int updateNameKey(StandardBean standardBean) ;
+
+    List<StandardBean> selectByType(String type) ;
+
+    int selectByTypeCount(String type) ;
 }

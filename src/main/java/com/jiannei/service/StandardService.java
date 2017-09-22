@@ -11,4 +11,6 @@ public interface StandardService {
 
     ResultBean searchStandardByCode(String code) throws Exception;
 
+    ResultBean searchStandardByType(String type) throws Exception;
+
 }
