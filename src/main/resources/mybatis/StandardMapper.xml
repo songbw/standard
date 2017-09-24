@@ -25,6 +25,11 @@
         <result property="nameKey" column="nameKey"/>
     </resultMap>
 
+    <resultMap id="standardSearchResultMap" type="com.jiannei.bean.StandardSearchRes">
+        <id property="id" column="id" />
+        <result property="nameKey" column="nameKey"/>
+    </resultMap>
+
     <insert id="addStandard"  keyProperty="id">
         insert into standard
         (name,parentId,kinship,type,engName,code,smallImg,smallImgPath,smallImgFlag, smallImgT,smallImgPathT,smallImgTFlag,img,imgPath,imgPathFlag,similar)
@@ -36,6 +41,10 @@
 
     <select id="selectTopOne" resultType="com.jiannei.bean.StandardBean">
         select * from standard order by id desc  limit 1;
+    </select>
+
+    <select id="selectById" resultType="com.jiannei.bean.StandardBean" parameterType="Long">
+        select * from standard where id =#{id}
     </select>
 
     <select id="countByParentId" resultType="int" parameterType="Long">
@@ -58,12 +67,12 @@
         where id=#{id}
     </update>
 
-    <select id="selectLike" resultMap="standardResultMap" parameterType="String">
-        select * from standard WHERE nameKey LIKE #{key}
+    <select id="selectLike" resultMap="standardSearchResultMap" parameterType="String">
+        select id,nameKey from standard WHERE nameKey LIKE #{key}
     </select>
 
     <select id="selectLikeCount" resultType="java.lang.Integer" parameterType="String">
-        select count(*) from standard WHERE nameKey LIKE #{key}
+        select count(id) from standard WHERE nameKey LIKE #{key}
     </select>
 
     <select id="selectByCode" resultMap="standardResultMap" parameterType="String">
@@ -74,11 +83,21 @@
         select count(*) from standard WHERE code = #{code}
     </select>
 
-    <select id="selectByType" resultMap="standardResultMap" parameterType="String">
-        select * from standard WHERE type = #{type}
+    <select id="selectByType" resultMap="standardResultMap" parameterType="com.jiannei.bean.StandardTypeParam">
+        select * from standard WHERE type = #{type} 
+        <if test="key!=null">
+            and nameKey LIKE #{key} limit #{currentPage}, #{pageSize}
+        </if>
+        <if test="key==null">
+            limit #{currentPage}, #{pageSize}
+        </if>
     </select>
 
-    <select id="selectByTypeCount" resultType="java.lang.Integer" parameterType="String">
-        select count(*) from standard WHERE type = #{type}
+    <select id="selectByTypeCount" resultType="java.lang.Integer" parameterType="com.jiannei.bean.StandardTypeParam">
+        select count(id) from standard WHERE type = #{type}
+        <if test="key!=null">
+            and nameKey LIKE #{key}
+        </if>
+
     </select>
 </mapper>

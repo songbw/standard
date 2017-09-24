@@ -1,6 +1,8 @@
 package com.jiannei.dao;
 
 import com.jiannei.bean.StandardBean;
+import com.jiannei.bean.StandardSearchRes;
+import com.jiannei.bean.StandardTypeParam;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,7 +21,7 @@ public interface StandardDAO {
 
     List<StandardBean> selectAll() ;
 
-    List<StandardBean> selectLike(String key) ;
+    List<StandardSearchRes> selectLike(String key) ;
 
     List<StandardBean> selectByCode(String code) ;
 
@@ -31,7 +33,9 @@ public interface StandardDAO {
 
     int updateNameKey(StandardBean standardBean) ;
 
-    List<StandardBean> selectByType(String type) ;
+    List<StandardBean> selectByType(StandardTypeParam standardTypeParam) ;
 
-    int selectByTypeCount(String type) ;
+    int selectByTypeCount(StandardTypeParam standardTypeParam) ;
+
+    StandardBean selectById(long id);
 }

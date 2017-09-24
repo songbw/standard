@@ -1,8 +1,6 @@
 package com.jiannei.service.impl;
 
-import com.jiannei.bean.PageBean;
-import com.jiannei.bean.ResultBean;
-import com.jiannei.bean.StandardBean;
+import com.jiannei.bean.*;
 import com.jiannei.dao.StandardDAO;
 import com.jiannei.service.StandardService;
 import org.apache.log4j.Logger;
@@ -25,7 +23,7 @@ public class StandardServiceImpl implements StandardService {
     @Override
     public ResultBean searchStandard(String key) throws Exception {
         ResultBean resultBean = new ResultBean();
-        List<StandardBean> standardBeanList = standardDAO.selectLike("%"+key+"%");
+        List<StandardSearchRes> standardBeanList = standardDAO.selectLike("%"+key+"%");
         int total = standardDAO.selectLikeCount("%"+key+"%");
         PageBean pageBean = new PageBean();
         pageBean.setList(standardBeanList);
@@ -47,14 +45,33 @@ public class StandardServiceImpl implements StandardService {
     }
 
     @Override
-    public ResultBean searchStandardByType(String type) throws Exception {
+    public ResultBean searchStandardByType(String type,int currentPage,int pageSize,String key) throws Exception {
         ResultBean resultBean = new ResultBean();
-        List<StandardBean> standardBeanList = standardDAO.selectByType(type);
-        int total = standardDAO.selectByTypeCount(type);
+        StandardTypeParam standardTypeParam = new StandardTypeParam();
+        standardTypeParam.setType(type);
+        standardTypeParam.setPageSize(pageSize);
+        if (key !=null && !"".equals(key)) {
+            standardTypeParam.setKey("%"+key+"%");
+        }
+        standardTypeParam.setCurrentPage(currentPage * pageSize);
+
+        List<StandardBean> standardBeanList = standardDAO.selectByType(standardTypeParam);
+        int total = standardDAO.selectByTypeCount(standardTypeParam);
         PageBean pageBean = new PageBean();
+        pageBean.setPageNo(currentPage);
+        pageBean.setPageSize(pageSize);
         pageBean.setList(standardBeanList);
         pageBean.setTotal(total);
+        pageBean.setPages(PageBean.getPages(total,pageSize));
         resultBean.setSucResult(pageBean);
+        return resultBean;
+    }
+
+    @Override
+    public ResultBean findById(long id) throws Exception {
+        ResultBean resultBean = new ResultBean();
+        StandardBean standardBean = standardDAO.selectById(id);
+        resultBean.setSucResult(standardBean);
         return resultBean;
     }
 }
