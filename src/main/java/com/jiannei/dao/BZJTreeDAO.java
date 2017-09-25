@@ -12,4 +12,6 @@ import java.util.List;
 @Repository
 public interface BZJTreeDAO {
     List<BZJTreeBean> selectByUrl();
+
+    List<BZJTreeBean> selectByParentId(long id);
 }

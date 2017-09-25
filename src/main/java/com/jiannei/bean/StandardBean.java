@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by song on 16/4/20.
  */
-public class StandardBean extends ReflectionDBObject implements Serializable {
+public class StandardBean implements Serializable {
     private long id;
     // 标准件名称
     private String name ;

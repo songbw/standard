@@ -13,6 +13,8 @@ public class StandardTypeParam {
 
     private int pageSize;
 
+    private long parentId;
+
     public String getType() {
         return type;
     }
@@ -43,5 +45,13 @@ public class StandardTypeParam {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(long parentId) {
+        this.parentId = parentId;
     }
 }

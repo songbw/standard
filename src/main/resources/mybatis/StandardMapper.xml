@@ -84,19 +84,33 @@
     </select>
 
     <select id="selectByType" resultMap="standardResultMap" parameterType="com.jiannei.bean.StandardTypeParam">
-        select * from standard WHERE type = #{type} 
+        select * from standard WHERE 1=1
         <if test="key!=null">
-            and nameKey LIKE #{key} limit #{currentPage}, #{pageSize}
+            and nameKey LIKE #{key}
         </if>
-        <if test="key==null">
-            limit #{currentPage}, #{pageSize}
+        <if test="type!=null">
+            <if test="type!=''">
+                and type = #{type}
+            </if>
         </if>
+        <if test="parentId!=0">
+            and parentId=#{parentId}
+        </if>
+        limit #{currentPage}, #{pageSize}
     </select>
 
     <select id="selectByTypeCount" resultType="java.lang.Integer" parameterType="com.jiannei.bean.StandardTypeParam">
-        select count(id) from standard WHERE type = #{type}
+        select count(id) from standard WHERE 1=1
+        <if test="type!=null">
+            <if test="type!=''">
+                and type = #{type}
+            </if>
+        </if>
         <if test="key!=null">
             and nameKey LIKE #{key}
+        </if>
+        <if test="parentId!=0">
+            and parentId=#{parentId}
         </if>
 
     </select>

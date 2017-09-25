@@ -16,4 +16,8 @@
     <select id="selectByUrl" resultMap="bzjTreeResultMap">
         select * from bzj_tree where url != 'null';
     </select>
+
+    <select id="selectByParentId"  resultMap="bzjTreeResultMap" parameterType="Long">
+        SELECT * FROM bzj_tree WHERE parentId = #{id}
+    </select>
 </mapper>

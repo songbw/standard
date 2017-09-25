@@ -47,13 +47,16 @@ public class StandardController {
     }
 
     @RequestMapping(value="",method= RequestMethod.GET)
-    public @ResponseBody ResultBean standardType(String type,Integer currentPage, Integer pageSize,String key) {
+    public @ResponseBody ResultBean standardType(String type,Integer currentPage, Integer pageSize,String key,long parentId) {
         ResultBean resultBean = new ResultBean();
+        if (type !=null && !"".equals(type)) {
+            type = "["+type+"]";
+        }
         if (pageSize == 0) {
             pageSize = 10;
         }
         try {
-            resultBean = standardService.searchStandardByType(type, currentPage, pageSize, key) ;
+            resultBean = standardService.searchStandardByType(type, currentPage, pageSize, key,parentId) ;
         } catch (Exception e) {
             e.printStackTrace();
             resultBean.setFailMsg(SystemStatus.SERVER_ERROR);

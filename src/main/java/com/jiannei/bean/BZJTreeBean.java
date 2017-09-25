@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by song on 16/4/19.
  */
-public class BZJTreeBean extends ReflectionDBObject implements Serializable{
+public class BZJTreeBean implements Serializable{
 
     private long id;
     private String name;

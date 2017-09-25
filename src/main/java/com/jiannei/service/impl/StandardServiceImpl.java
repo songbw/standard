@@ -45,11 +45,12 @@ public class StandardServiceImpl implements StandardService {
     }
 
     @Override
-    public ResultBean searchStandardByType(String type,int currentPage,int pageSize,String key) throws Exception {
+    public ResultBean searchStandardByType(String type,int currentPage,int pageSize,String key,long parentId) throws Exception {
         ResultBean resultBean = new ResultBean();
         StandardTypeParam standardTypeParam = new StandardTypeParam();
         standardTypeParam.setType(type);
         standardTypeParam.setPageSize(pageSize);
+        standardTypeParam.setParentId(parentId);
         if (key !=null && !"".equals(key)) {
             standardTypeParam.setKey("%"+key+"%");
         }
