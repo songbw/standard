@@ -1,5 +1,6 @@
 package com.jiannei.filter;
 
+import com.jiannei.utils.IPAddressUtil;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
@@ -25,6 +26,7 @@ public class MyFilter implements Filter {
           ServletException {
     HttpServletRequest req = (HttpServletRequest) request;
     req.setCharacterEncoding("utf-8");
+    log.info("client ip is :"+IPAddressUtil.getClientIP(req));
     log.info("请求地址:" + req.getRequestURL() + "   请求参数：" + req.getQueryString() + "  涉及到的方法为：" + req.getMethod()+"请求头信息: token: "+req.getHeader("token") + " openId: "+req.getHeader("openId"));
     int length = req.getContentLength();
     if (length > 0) {
